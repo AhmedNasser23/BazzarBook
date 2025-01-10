@@ -1,19 +1,20 @@
-﻿using BazzarBook.Data;
-using BazzarBook.Models;
+﻿using Bazzar.Models;
+using BazzarBook.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BazzarBook.Controllers
+namespace BazzarBook.Areas.Admin.Controllers
 {
+	[Area("Admin")]
 	public class CategoryController : Controller
 	{
-		private readonly ApplicationDbContext _dbContext;
-		public CategoryController(ApplicationDbContext dbContext)
+		private readonly IUnitOfWork _unitOfWork;
+		public CategoryController(IUnitOfWork unitOfWork)
 		{
-			_dbContext = dbContext;
+			_unitOfWork = unitOfWork;
 		}
 		public IActionResult Index()
 		{
-			List<Category> categoriesList = _dbContext.Categories.OrderBy(x => x.DisplayOrder).ToList();
+			List<Category> categoriesList = _unitOfWork.Category.GetAll().OrderBy(x => x.DisplayOrder).ToList();
 			return View(categoriesList);
 		}
 		public IActionResult Create()
@@ -29,8 +30,8 @@ namespace BazzarBook.Controllers
 			}
 			if (ModelState.IsValid)
 			{
-				_dbContext.Categories.Add(category);
-				_dbContext.SaveChanges();
+				_unitOfWork.Category.Add(category);
+				_unitOfWork.Save();
 				TempData["success"] = "Category created successfully.";
 				return RedirectToAction("Index", "Category"); // Because we are in the same controlloer it's optional to add Category controller after action
 			}
@@ -42,9 +43,9 @@ namespace BazzarBook.Controllers
 			{
 				return NotFound();
 			}
-			Category? foundedCategory = _dbContext.Categories.Find(id); // work only with primay key
-																		//Category? category = _dbContext.Categories.FirstOrDefault(category => category.Id == id);
-																		//Category? category = _dbContext.Categories.Where(category => category.Id == id).FirstOrDefault();
+			Category? foundedCategory = _unitOfWork.Category.Get(category => category.Id == id); // work only with primay key
+																								 //Category? category = _dbContext.Categories.FirstOrDefault(category => category.Id == id);
+																								 //Category? category = _dbContext.Categories.Where(category => category.Id == id).FirstOrDefault();
 			if (foundedCategory == null)
 			{
 				return NotFound();
@@ -56,8 +57,8 @@ namespace BazzarBook.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				_dbContext.Categories.Update(category);
-				_dbContext.SaveChanges();
+				_unitOfWork.Category.Update(category);
+				_unitOfWork.Save();
 				TempData["success"] = "Category updated successfully.";
 				return RedirectToAction("Index", "Category"); // Because we are in the same controlloer it's optional to add Category controller after action
 			}
@@ -71,7 +72,7 @@ namespace BazzarBook.Controllers
 				return NotFound();
 			}
 
-			Category? foundedCategory = _dbContext.Categories.Find(id);
+			Category? foundedCategory = _unitOfWork.Category.Get(category => category.Id == id);
 			if (foundedCategory == null)
 			{
 				return NotFound();
@@ -81,13 +82,13 @@ namespace BazzarBook.Controllers
 		[HttpPost, ActionName("Delete")]
 		public IActionResult DeletePost(int? id)
 		{
-			Category? category = _dbContext.Categories.Find(id);
+			Category? category = _unitOfWork.Category.Get(category => category.Id == id);
 			if (category == null)
 			{
 				return NotFound();
 			}
-			_dbContext.Remove(category);
-			_dbContext.SaveChanges();
+			_unitOfWork.Category.Remove(category);
+			_unitOfWork.Save();
 			TempData["success"] = "Category deleted successfully.";
 			return RedirectToAction("Index");
 		}

@@ -5,11 +5,11 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BazzarBook", "BazzarBook.csproj", "{77DB0012-0F40-4EA0-B8CA-9E1FF1FFE085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazzar.DataAccess", "..\DataAccess\Bazzar.DataAccess.csproj", "{6A14215C-820D-4D8E-B075-DCEA653A04A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BazzarBook.DataAccess", "..\DataAccess\BazzarBook.DataAccess.csproj", "{6A14215C-820D-4D8E-B075-DCEA653A04A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazzar.Models", "..\Models\Bazzar.Models.csproj", "{EC1CB081-6513-4AC1-AD30-4409DAE888E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BazzarBook.Models", "..\Models\BazzarBook.Models.csproj", "{EC1CB081-6513-4AC1-AD30-4409DAE888E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazzar.Utility", "..\Utility\Bazzar.Utility.csproj", "{9555C3A0-5831-45ED-9648-8BADF57417D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BazzarBook.Utility", "..\Utility\BazzarBook.Utility.csproj", "{9555C3A0-5831-45ED-9648-8BADF57417D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
