@@ -1,5 +1,5 @@
-﻿using Bazzar.Models;
-using BazzarBook.DataAccess.Repository.IRepository;
+﻿using BazzarBook.DataAccess.Repository.IRepository;
+using BazzarBook.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BazzarBook.Areas.Admin.Controllers

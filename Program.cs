@@ -1,6 +1,6 @@
-using Bazzar.DataAcess.Data;
 using BazzarBook.DataAccess.Repository;
 using BazzarBook.DataAccess.Repository.IRepository;
+using BazzarBook.DataAcess.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
