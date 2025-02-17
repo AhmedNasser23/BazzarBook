@@ -1,15 +1,14 @@
 ﻿using BazzarBook.DataAccess.Repository.IRepository;
 using BazzarBook.Models;
 using BazzarBook.Models.ViewModels;
-using BazzarBook.Utility;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data;
 
-namespace BazzarBook.Areas.Admin.Controllers
+namespace BazzarBookWeb.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize(Roles = SD.Role_Admin)]
+	// [Authorize(Roles = SD.Role_Admin)]
 	public class ProductController : Controller
 	{
 		private readonly IUnitOfWork _unitOfWork;
@@ -19,41 +18,39 @@ namespace BazzarBook.Areas.Admin.Controllers
 			_unitOfWork = unitOfWork;
 			_webHostEnvironment = webHostEnvironment;
 		}
-
 		public IActionResult Index()
 		{
-			List<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+			List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
 
-			return View(productList);
+			return View(objProductList);
 		}
+
 		public IActionResult Upsert(int? id)
 		{
-			//ViewBag.CategoryList = catgeroyList;
-			//ViewData["CategoryList"] = catgeroyList;
-			ProductViewModel productViewModel = new ProductViewModel
+			ProductViewModel ProductViewModel = new()
 			{
-				catgeroyList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+				CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
 				{
 					Text = u.Name,
 					Value = u.Id.ToString()
 				}),
-				Product = new()
+				Product = new Product()
 			};
 			if (id == null || id == 0)
 			{
-				// create
-				return View(productViewModel);
+				//create
+				return View(ProductViewModel);
 			}
 			else
 			{
-				// update
-				productViewModel.Product = _unitOfWork.Product.Get(p => p.Id == id);
-				return View(productViewModel);
+				//update
+				ProductViewModel.Product = _unitOfWork.Product.Get(u => u.Id == id);
+				return View(ProductViewModel);
 			}
 
 		}
 		[HttpPost]
-		public IActionResult Upsert(ProductViewModel productViewModel, IFormFile? file)
+		public IActionResult Upsert(ProductViewModel ProductViewModel, IFormFile? file)
 		{
 			if (ModelState.IsValid)
 			{
@@ -63,10 +60,11 @@ namespace BazzarBook.Areas.Admin.Controllers
 					string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
 					string productPath = Path.Combine(wwwRootPath, @"images\product");
 
-					if (!string.IsNullOrEmpty(productViewModel.Product.ImageUrl))
+					if (!string.IsNullOrEmpty(ProductViewModel.Product.ImageUrl))
 					{
-						// Delete the old image
-						var oldImagePath = Path.Combine(wwwRootPath, productViewModel.Product.ImageUrl.TrimStart('\\'));
+						//delete the old image
+						var oldImagePath =
+							Path.Combine(wwwRootPath, ProductViewModel.Product.ImageUrl.TrimStart('\\'));
 
 						if (System.IO.File.Exists(oldImagePath))
 						{
@@ -74,66 +72,73 @@ namespace BazzarBook.Areas.Admin.Controllers
 						}
 					}
 
-
 					using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
 					{
 						file.CopyTo(fileStream);
 					}
 
-					productViewModel.Product.ImageUrl = @"\images\product\" + fileName;
+					ProductViewModel.Product.ImageUrl = @"\images\product\" + fileName;
 				}
 
-				if (productViewModel.Product.Id == 0)
+				if (ProductViewModel.Product.Id == 0)
 				{
-					_unitOfWork.Product.Add(productViewModel.Product);
+					_unitOfWork.Product.Add(ProductViewModel.Product);
 				}
 				else
 				{
-					_unitOfWork.Product.Update(productViewModel.Product);
+					_unitOfWork.Product.Update(ProductViewModel.Product);
 				}
+
 				_unitOfWork.Save();
-				TempData["success"] = "Product created successfully.";
-				return RedirectToAction("Index", "Product");
+				TempData["success"] = "Product created successfully";
+				return RedirectToAction("Index");
 			}
 			else
 			{
-				productViewModel.catgeroyList = _unitOfWork.Category.GetAll(includeProperties: "Category").Select(u => new SelectListItem
+				ProductViewModel.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
 				{
 					Text = u.Name,
 					Value = u.Id.ToString()
 				});
-				return View(productViewModel);
+				return View(ProductViewModel);
 			}
 		}
 
+
 		#region API CALLS
+
 		[HttpGet]
 		public IActionResult GetAll()
 		{
-			List<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
-			return Json(new { data = productList });
+			List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+			return Json(new { data = objProductList });
 		}
+
+
 		[HttpDelete]
 		public IActionResult Delete(int? id)
 		{
-			var productToBeDeleted = _unitOfWork.Product.Get(product => product.Id == id);
+			var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
 			if (productToBeDeleted == null)
 			{
-				return Json(new { success = false, message = "Eroor while deleting" });
+				return Json(new { success = false, message = "Error while deleting" });
 			}
 
-			var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
+			var oldImagePath =
+						   Path.Combine(_webHostEnvironment.WebRootPath,
+						   productToBeDeleted.ImageUrl.TrimStart('\\'));
 
 			if (System.IO.File.Exists(oldImagePath))
 			{
 				System.IO.File.Delete(oldImagePath);
 			}
+
 			_unitOfWork.Product.Remove(productToBeDeleted);
 			_unitOfWork.Save();
 
-			return Json(new { success = true, message = "Product deleted successfully" });
+			return Json(new { success = true, message = "Delete Successful" });
 		}
-		#endregion
 
+		#endregion
 	}
 }

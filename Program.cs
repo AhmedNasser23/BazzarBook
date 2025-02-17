@@ -10,30 +10,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-// We we need to add entity framework to project
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-		options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-	);
-
-//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
-
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
-
-// Must be here after AddIdentity
 builder.Services.ConfigureApplicationCookie(options =>
 {
 	options.LoginPath = $"/Identity/Account/Login";
 	options.LogoutPath = $"/Identity/Account/Logout";
 	options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });
-
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
 builder.Services.AddRazorPages();
-
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -51,7 +40,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
-
 app.MapControllerRoute(
 	name: "default",
 	pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");

@@ -1,13 +1,11 @@
 ﻿using BazzarBook.DataAccess.Repository.IRepository;
 using BazzarBook.Models;
-using BazzarBook.Utility;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BazzarBook.Areas.Admin.Controllers
+namespace BazzarBookWeb.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize(Roles = SD.Role_Admin)]
+	//[Authorize(Roles = SD.Role_Admin)]
 	public class CategoryController : Controller
 	{
 		private readonly IUnitOfWork _unitOfWork;
@@ -17,84 +15,89 @@ namespace BazzarBook.Areas.Admin.Controllers
 		}
 		public IActionResult Index()
 		{
-			List<Category> categoriesList = _unitOfWork.Category.GetAll().OrderBy(x => x.DisplayOrder).ToList();
-			return View(categoriesList);
+			List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
+			return View(objCategoryList);
 		}
+
 		public IActionResult Create()
 		{
 			return View();
 		}
 		[HttpPost]
-		public IActionResult Create(Category category)
+		public IActionResult Create(Category obj)
 		{
-			if (category.Name == category.DisplayOrder.ToString())
+			if (obj.Name == obj.DisplayOrder.ToString())
 			{
-				ModelState.AddModelError("Name", "The Display Order cannot exactly match the Name."); // Will display this error msg under the name field
+				ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name.");
 			}
+
 			if (ModelState.IsValid)
 			{
-				_unitOfWork.Category.Add(category);
+				_unitOfWork.Category.Add(obj);
 				_unitOfWork.Save();
-				TempData["success"] = "Category created successfully.";
-				return RedirectToAction("Index", "Category"); // Because we are in the same controlloer it's optional to add Category controller after action
+				TempData["success"] = "Category created successfully";
+				return RedirectToAction("Index");
 			}
 			return View();
+
 		}
+
 		public IActionResult Edit(int? id)
 		{
 			if (id == null || id == 0)
 			{
 				return NotFound();
 			}
-			Category? foundedCategory = _unitOfWork.Category.Get(category => category.Id == id); // work only with primay key
-																								 //Category? category = _dbContext.Categories.FirstOrDefault(category => category.Id == id);
-																								 //Category? category = _dbContext.Categories.Where(category => category.Id == id).FirstOrDefault();
-			if (foundedCategory == null)
+			Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
+			//Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==id);
+			//Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id==id).FirstOrDefault();
+
+			if (categoryFromDb == null)
 			{
 				return NotFound();
 			}
-			return View(foundedCategory);
+			return View(categoryFromDb);
 		}
 		[HttpPost]
-		public IActionResult Edit(Category category)
+		public IActionResult Edit(Category obj)
 		{
 			if (ModelState.IsValid)
 			{
-				_unitOfWork.Category.Update(category);
+				_unitOfWork.Category.Update(obj);
 				_unitOfWork.Save();
-				TempData["success"] = "Category updated successfully.";
-				return RedirectToAction("Index", "Category"); // Because we are in the same controlloer it's optional to add Category controller after action
+				TempData["success"] = "Category updated successfully";
+				return RedirectToAction("Index");
 			}
 			return View();
+
 		}
 
 		public IActionResult Delete(int? id)
 		{
-			if (id == 0 || id == null)
+			if (id == null || id == 0)
 			{
 				return NotFound();
 			}
+			Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
 
-			Category? foundedCategory = _unitOfWork.Category.Get(category => category.Id == id);
-			if (foundedCategory == null)
+			if (categoryFromDb == null)
 			{
 				return NotFound();
 			}
-			return View(foundedCategory);
+			return View(categoryFromDb);
 		}
 		[HttpPost, ActionName("Delete")]
-		public IActionResult DeletePost(int? id)
+		public IActionResult DeletePOST(int? id)
 		{
-			Category? category = _unitOfWork.Category.Get(category => category.Id == id);
-			if (category == null)
+			Category? obj = _unitOfWork.Category.Get(u => u.Id == id);
+			if (obj == null)
 			{
 				return NotFound();
 			}
-			_unitOfWork.Category.Remove(category);
+			_unitOfWork.Category.Remove(obj);
 			_unitOfWork.Save();
-			TempData["success"] = "Category deleted successfully.";
+			TempData["success"] = "Category deleted successfully";
 			return RedirectToAction("Index");
 		}
-
 	}
 }

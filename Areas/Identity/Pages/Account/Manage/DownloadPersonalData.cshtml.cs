@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace BazzarBook.Areas.Identity.Pages.Account.Manage
+namespace BazzarBookWeb.Areas.Identity.Pages.Account.Manage
 {
     public class DownloadPersonalDataModel : PageModel
     {
@@ -60,7 +60,7 @@ namespace BazzarBook.Areas.Identity.Pages.Account.Manage
 
             personalData.Add($"Authenticator Key", await _userManager.GetAuthenticatorKeyAsync(user));
 
-            Response.Headers.TryAdd("Content-Disposition", "attachment; filename=PersonalData.json");
+            Response.Headers.Add("Content-Disposition", "attachment; filename=PersonalData.json");
             return new FileContentResult(JsonSerializer.SerializeToUtf8Bytes(personalData), "application/json");
         }
     }
