@@ -1,0 +1,12 @@
+D:\Bulky_MVC-master\Bulky.Utility\bin\Debug\net8.0\BazzarBook.Utility.deps.json
+D:\Bulky_MVC-master\Bulky.Utility\bin\Debug\net8.0\BazzarBook.Utility.dll
+D:\Bulky_MVC-master\Bulky.Utility\bin\Debug\net8.0\BazzarBook.Utility.pdb
+D:\Bulky_MVC-master\Bulky.Utility\obj\Debug\net8.0\BazzarBook.Utility.csproj.AssemblyReference.cache
+D:\Bulky_MVC-master\Bulky.Utility\obj\Debug\net8.0\BazzarBook.Utility.GeneratedMSBuildEditorConfig.editorconfig
+D:\Bulky_MVC-master\Bulky.Utility\obj\Debug\net8.0\BazzarBook.Utility.AssemblyInfoInputs.cache
+D:\Bulky_MVC-master\Bulky.Utility\obj\Debug\net8.0\BazzarBook.Utility.AssemblyInfo.cs
+D:\Bulky_MVC-master\Bulky.Utility\obj\Debug\net8.0\BazzarBook.Utility.csproj.CoreCompileInputs.cache
+D:\Bulky_MVC-master\Bulky.Utility\obj\Debug\net8.0\BazzarBook.Utility.dll
+D:\Bulky_MVC-master\Bulky.Utility\obj\Debug\net8.0\refint\BazzarBook.Utility.dll
+D:\Bulky_MVC-master\Bulky.Utility\obj\Debug\net8.0\BazzarBook.Utility.pdb
+D:\Bulky_MVC-master\Bulky.Utility\obj\Debug\net8.0\ref\BazzarBook.Utility.dll
