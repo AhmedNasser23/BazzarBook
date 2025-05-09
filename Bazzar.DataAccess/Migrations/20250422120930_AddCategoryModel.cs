@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace BazzarBook.Migrations
+namespace Bazzar.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCategoryModel : Migration

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace BazzarBook.Models
+namespace Bazzar.Models
 {
 	public class Category
 	{

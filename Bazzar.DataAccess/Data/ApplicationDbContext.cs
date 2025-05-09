@@ -1,7 +1,7 @@
-﻿using BazzarBook.Models;
+﻿using Bazzar.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BazzarBook.Data
+namespace Bazzar.DataAccess.Data
 {
 	public class ApplicationDbContext : DbContext
 	{

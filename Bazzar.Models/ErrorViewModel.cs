@@ -1,4 +1,4 @@
-namespace BazzarBook.Models
+namespace Bazzar.Models
 {
     public class ErrorViewModel
     {
