@@ -3,12 +3,15 @@ using Bazzar.DataAccess.Repository;
 using Bazzar.DataAccess.Repository.IRepository;
 using Bazzar.Models;
 using Bazzar.Models.ViewModels;
+using Bazzar.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BazzarBook.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
