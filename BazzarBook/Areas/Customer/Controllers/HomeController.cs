@@ -1,8 +1,9 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Bazzar.Models;
 using Bazzar.DataAccess.Repository.IRepository;
+using Bazzar.Models;
+using Bazzar.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.Security.Claims;
 
 namespace BazzarBook.Areas.Customer.Controllers
@@ -50,15 +51,17 @@ namespace BazzarBook.Areas.Customer.Controllers
             {
                 cartFromDb.Count += shoppingCart.Count;
                 _unitOfWork.ShoppingCartRepository.Update(cartFromDb);
+                _unitOfWork.Save();
             }
             else
             {
                 _unitOfWork.ShoppingCartRepository.Add(shoppingCart);
+                _unitOfWork.Save();
+                HttpContext.Session.SetInt32(SD.SessionCart,
+                _unitOfWork.ShoppingCartRepository.GetAll(u => u.ApplicationUserId == userId).Count());
             }
             
             TempData["success"] = "Book added to cart successfully";
-            _unitOfWork.Save();
-
 
             return RedirectToAction(nameof(Index));
         }
