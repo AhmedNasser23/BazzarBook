@@ -33,7 +33,7 @@ Administrators have access to an intuitive dashboard for managing books, categor
 
 ### Prerequisites
 
-- .NET SDK 6.0+
+- .NET SDK 8.0+
 - SQL Server
 - Stripe account (for API keys)
 
@@ -74,8 +74,8 @@ Administrators have access to an intuitive dashboard for managing books, categor
 
 ### 🔐 Login / Register  
 
-![image](https://github.com/user-attachments/assets/907ab2c8-f5fa-40ef-bd6a-4282021f7548)
-![image](https://github.com/user-attachments/assets/1652c858-e856-4f81-9d0f-fcbe7ab44369)
+![image](https://github.com/user-attachments/assets/eceda6dd-d758-4e5f-aa65-9a17baf7348f)
+![image](https://github.com/user-attachments/assets/7a01deac-e413-4d9e-8354-ff722a02e5d7)
 
 ### 📦 Admin Dashboard  
 ![image](https://github.com/user-attachments/assets/8e34415d-c8fa-43dc-a548-79558807bdfa)
