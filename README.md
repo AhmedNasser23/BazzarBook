@@ -5,9 +5,7 @@
 
 Administrators have access to an intuitive dashboard for managing books, categories, companies, and order statuses. The application uses **Entity Framework Core** for seamless database interactions and follows best practices, including **SOLID principles** and responsive design, ensuring a scalable, user-friendly experience.
 
-Demo Video: <a href="https://drive.google.com/file/d/1OIcpWsdZxpv8poATz4KT3QY3MJGhFZt6/view?usp=sharing">
-    Show the demo
-  </a>
+📽️ [Watch Demo Video on Google Drive](https://drive.google.com/file/d/1OIcpWsdZxpv8poATz4KT3QY3MJGhFZt6/view?usp=sharing)
 
 ---
 
