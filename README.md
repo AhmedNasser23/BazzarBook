@@ -1,7 +1,7 @@
 
 # 📚 BazzarBook - E-commerce Web Application for Book Sales
 
-**Bulky Book** is a feature-rich e-commerce web application tailored for book sales, built using **ASP.NET Core MVC**. The platform allows users to browse books by category, add items to their shopping cart or wishlist, and securely complete purchases via **Stripe** payment integration. It includes robust features like order tracking, user authentication, and role-based access control for admins, employees, and customers.
+**BazzarBook** is a feature-rich e-commerce web application tailored for book sales, built using **ASP.NET Core MVC**. The platform allows users to browse books by category, add items to their shopping cart or wishlist, and securely complete purchases via **Stripe** payment integration. It includes robust features like order tracking, user authentication, and role-based access control for admins, employees, and customers.
 
 Administrators have access to an intuitive dashboard for managing books, categories, companies, and order statuses. The application uses **Entity Framework Core** for seamless database interactions and follows best practices, including **SOLID principles** and responsive design, ensuring a scalable, user-friendly experience.
 
@@ -64,28 +64,29 @@ Administrators have access to an intuitive dashboard for managing books, categor
 ## 📸 Screenshots
 
 ### 🏠 Home Page  
-<!-- Add screenshot here -->  
-![Home Page](screenshots/home.png)
+
+![image](https://github.com/user-attachments/assets/3c9614c3-976a-4ffc-b7b9-23bd5eb6766e)
+
 
 ### 🛍️ Shopping Cart  
-<!-- Add screenshot here -->  
-![Cart](screenshots/cart.png)
+
+![image](https://github.com/user-attachments/assets/983f68f8-538d-4daa-960d-4ed40c5cdfb9)
 
 ### 🔐 Login / Register  
-<!-- Add screenshot here -->  
-![Auth](screenshots/auth.png)
+
+![image](https://github.com/user-attachments/assets/907ab2c8-f5fa-40ef-bd6a-4282021f7548)
+![image](https://github.com/user-attachments/assets/1652c858-e856-4f81-9d0f-fcbe7ab44369)
 
 ### 📦 Admin Dashboard  
-<!-- Add screenshot here -->  
-![Admin Dashboard](screenshots/admin.png)
+![image](https://github.com/user-attachments/assets/8e34415d-c8fa-43dc-a548-79558807bdfa)
+![image](https://github.com/user-attachments/assets/0e7d84ff-7bcd-4a5d-938a-b6a0498a9e7a)
+![image](https://github.com/user-attachments/assets/1e073856-3031-44f6-89b0-9ef0af766da1)
+![image](https://github.com/user-attachments/assets/095bd196-07f8-4f60-a9b0-59ceafa9fd02)
+![image](https://github.com/user-attachments/assets/06746707-0082-4f0f-a03e-8892b2612fcd)
+![image](https://github.com/user-attachments/assets/a5bd37f0-e768-4b68-ad90-fb3e7258b467)
 
 ### 💳 Checkout with Stripe  
-<!-- Add screenshot here -->  
-![Checkout](screenshots/checkout.png)
 
----
+![image](https://github.com/user-attachments/assets/388d6f99-e0b1-4aed-b049-2d32dad6d7c5)
 
-## 📬 Contact
 
-Feel free to reach out for collaboration or questions!  
-**Ahmed Nasser** – [LinkedIn](https://linkedin.com/in/ahmed-nasser-91aab6279) | [GitHub](https://github.com/AhmedNasser23)
