@@ -18,6 +18,7 @@ namespace Bazzar.DataAccess.Repository
 
         public IShoppingCartRepository ShoppingCartRepository { get; private set; }
 
+        public IProductImageRepository ProductImageRepository { get; private set; }
         public IApplicationUserRepository ApplicationUserRepository { get; private set; }
         public IOrderHeaderRepository OrderHeaderRepository { get; private set; }
         public IOrderDetailRepository OrderDetailRepository { get; private set; }
@@ -26,6 +27,7 @@ namespace Bazzar.DataAccess.Repository
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
+            ProductImageRepository = new ProductImageRepository(_db);
             CategoryRepository = new CategoryRepository(_db);
             ProductRepository = new ProductRepository(_db);
             CompanyRepository = new CompanyRepository(_db);
